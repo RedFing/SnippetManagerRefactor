@@ -2,6 +2,8 @@
   "extends": "airbnb",
   "rules": {
     "react/jsx-filename-extension": "off",
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "linebreak-style": "off",
+    "react/prop-types": "off"
   }
 }
