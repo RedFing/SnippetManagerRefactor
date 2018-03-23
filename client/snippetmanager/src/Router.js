@@ -9,6 +9,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
+import Main from './components/Main';
 import Login from './components/Login';
 
 class Router extends React.Component {
@@ -25,9 +26,6 @@ class Router extends React.Component {
   }
 }
 
-const Main = props => (
-  <div>Main</div>
-);
 const PrivateRoute = ({ component: Component, isLogged, ...rest }) => (
   <Route
     {...rest}
