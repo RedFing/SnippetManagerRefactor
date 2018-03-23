@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setGistEditMode } from '../actions/gistActions';
+import { setGistEditMode, deleteGist } from '../actions/gistActions';
 
 
 class EditorViewGist extends React.Component {
@@ -19,6 +19,7 @@ class EditorViewGist extends React.Component {
           Created at: {gist.gist.createdAt}
         </div>
         <button onClick={this.props.setGistEditMode}>edit</button>
+        <button onClick={this.props.deleteGist}>delete</button>
       </div>
     );
   }
@@ -27,5 +28,5 @@ class EditorViewGist extends React.Component {
 
 const mapStateToProps = ({ gist }) => ({ gist });
 
-export default connect(mapStateToProps, { setGistEditMode })(EditorViewGist);
+export default connect(mapStateToProps, { setGistEditMode, deleteGist })(EditorViewGist);
 

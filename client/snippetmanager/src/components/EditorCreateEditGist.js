@@ -3,6 +3,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Checkbox, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { cancelGistEditMode } from "../actions/gistActions";
 
 class EditorCreateEditGist extends React.Component {
   constructor(props) {
@@ -76,7 +77,7 @@ class EditorCreateEditGist extends React.Component {
 
               <Checkbox
                 checked={this.state.isPrivate}
-                onChecked={this.handleInputChange}
+                onChange={this.handleInputChange}
                 name="isPrivate"
               >
                 Is this a private gist?
@@ -84,6 +85,9 @@ class EditorCreateEditGist extends React.Component {
 
               }
               <Button>{submitButtonText}</Button>
+              {editorMode === 'edit' &&
+              <Button onClick={this.props.cancelGistEditMode}>Cancel edit</Button>
+              }
             </FormGroup>
           </form>
         </div>
@@ -95,5 +99,5 @@ class EditorCreateEditGist extends React.Component {
 
 const mapStateToProps = ({ gist }) => ({ gist });
 
-export default connect(mapStateToProps, {})(EditorCreateEditGist);
+export default connect(mapStateToProps, { cancelGistEditMode })(EditorCreateEditGist);
 

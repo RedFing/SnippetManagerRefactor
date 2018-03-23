@@ -20,11 +20,11 @@ router.get('/gists/:pageNumber/:fetchSize', function(req, res, next) {
        res.status(401).send('Unauthorized');
    })
 });
-router.get('/gist/:id', function (req,res,next){
+router.get('/gist/:gistId', function (req,res,next){
   const user = req.user;
-  if (!user) res.status(401);
-  const id = req.params.id;
-  axios.get('https://api.github.com/gists/'+id+'?'+user.accessToken)
+  if (!user) res.status(401).send('Unauthorized');
+  const gistId = req.params.gistId;
+  axios.get('https://api.github.com/gists/'+gistId+'?'+user.accessToken)
     .then(response => {
         const gist = stripUnnecessaryFromFormGist(response.data);
         res.json(gist);
@@ -32,6 +32,16 @@ router.get('/gist/:id', function (req,res,next){
       console.log(err);
       res.status(401).send('Unauthorized');
   });
+});
+router.delete('/gist/:gistId', function (req,res,next) {
+  const user = req.user;
+  if (!user) res.status(401).send('Unauthorized');
+  const gistId = req.params.gistId;
+  axios.delete('https://api.github.com/gists/'+gistId+'?'+user.accessToken)
+    .then(() => {
+      res.status(200).send();
+
+    }).catch(err => res.status(401).send('Unauthorized'));
 });
 module.exports = router;
 

@@ -1,4 +1,5 @@
-import { LOAD_GISTS_SUCCESS, LOAD_GISTS_PENDING, LOGOUT_USER } from '../actions/actionTypes';
+/* eslint-disable eqeqeq */
+import { LOAD_GISTS_SUCCESS, LOAD_GISTS_PENDING, LOGOUT_USER, DELETE_GIST_SUCCESS } from '../actions/actionTypes';
 import { GISTS_FETCH_SIZE } from '../actions/constants';
 
 const INITIAL_STATE = {
@@ -7,6 +8,8 @@ const INITIAL_STATE = {
   page: 1,
   isRemaining: true,
 };
+
+const removeDeletedGist = (gists, gistId) => gists.filter(el => el.id != gistId);
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -23,43 +26,15 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: true,
       };
-    case LOGOUT_USER:
-      return INITIAL_STATE;
-    default:
-      return state;
-  }
-};
-
-
-/*
-
-import {LOGIN_USER_SUCCESS, LOGOUT_USER} from '../actions/actionTypes';
-
-const INITIAL_STATE = {
-  isLogged: false,
-  username: '',
-  id: '',
-  avatarUrl: '',
-  token: '',
-};
-
-export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case LOGIN_USER_SUCCESS:
+    case DELETE_GIST_SUCCESS: {
       return {
         ...state,
-        isLogged: true,
-        username: action.payload.username,
-        id: action.payload.id,
-        avatarUrl: action.payload.avatar_url,
-        token: action.payload.token,
+        gists: removeDeletedGist(state.gists, action.payload),
       };
+    }
     case LOGOUT_USER:
       return INITIAL_STATE;
     default:
       return state;
   }
 };
-
-
- */
