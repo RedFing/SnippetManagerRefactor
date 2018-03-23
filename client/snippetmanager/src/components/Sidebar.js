@@ -11,7 +11,7 @@ class Sidebar extends React.Component {
   }
   render() {
     return (
-      <div id="sidebar" className="sidebar-offcanvas">
+      <div id="sidebar">
         <div className="col-md-12">
           <h3>Sidebar (fixed)</h3>
           <ul className="nav nav-pills nav-stacked">
