@@ -1,4 +1,4 @@
-import { LOAD_GIST_PENDING, LOAD_GIST_SUCCESS, LOAD_GIST_FAILED } from '../actions/actionTypes';
+import { LOAD_GIST_PENDING, LOAD_GIST_SUCCESS, SET_GIST_EDIT_MODE, SET_GIST_ADD_MODE } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   selected: false,
@@ -23,16 +23,15 @@ export default (state = INITIAL_STATE, action) => {
         editorMode: 'view',
         selected: true,
       };
-    case 'SET_GIST_EDIT_MODE':
+    case SET_GIST_EDIT_MODE:
       return {
         ...state,
         editorMode: 'edit',
       };
-    case 'DELETE_GIST':
+    case SET_GIST_ADD_MODE:
       return {
-        ...state,
-        selected: false,
-        loading: false,
+        ...INITIAL_STATE,
+        editorMode: 'add',
       };
     case 'LOGOUT_USER':
       return INITIAL_STATE;
