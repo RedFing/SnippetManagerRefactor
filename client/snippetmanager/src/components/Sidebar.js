@@ -15,7 +15,7 @@ class Sidebar extends React.Component {
         <div className="col-md-12">
           <h3>Sidebar (fixed)</h3>
           <ul className="nav nav-pills nav-stacked">
-            {this.props.gists.map(el => <GistItemSidebar gistInfo={el} loadGist={this.props.loadGist} />)}
+            {this.props.gists.map(el => <GistItemSidebar key={el.id} gistInfo={el} loadGist={this.props.loadGist} />)}
           </ul>
         </div>
 

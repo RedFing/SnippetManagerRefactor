@@ -3,7 +3,7 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Checkbox, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { cancelGistEditMode } from "../actions/gistActions";
+import { cancelGistEditMode, addGist, editGist } from '../actions/gistActions';
 
 class EditorCreateEditGist extends React.Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class EditorCreateEditGist extends React.Component {
         content: gist.content,
         filename: gist.filename,
         description: gist.description,
+        isPrivate: null,
       };
     } else {
       this.state = {
@@ -24,6 +25,7 @@ class EditorCreateEditGist extends React.Component {
       };
     }
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleGistSubmit = this.handleGistSubmit.bind(this);
   }
   handleInputChange(event) {
     const target = event.target;
@@ -33,6 +35,23 @@ class EditorCreateEditGist extends React.Component {
     this.setState({
       [name]: value,
     });
+  }
+  handleGistSubmit() {
+    const { editorMode } = this.props.gist;
+    const {
+      filename, content, description, isPrivate,
+    } = this.state;
+    if (editorMode === 'add') {
+      // create new gist
+      this.props.addGist({
+        filename, content, description, isPrivate,
+      });
+    } else {
+      // edit the gist
+      this.props.editGist({
+        filename, content, description,
+      });
+    }
   }
   render() {
     const { editorMode } = this.props.gist;
@@ -84,7 +103,7 @@ class EditorCreateEditGist extends React.Component {
               </Checkbox>
 
               }
-              <Button>{submitButtonText}</Button>
+              <Button onClick={this.handleGistSubmit}>{submitButtonText}</Button>
               {editorMode === 'edit' &&
               <Button onClick={this.props.cancelGistEditMode}>Cancel edit</Button>
               }
@@ -99,5 +118,5 @@ class EditorCreateEditGist extends React.Component {
 
 const mapStateToProps = ({ gist }) => ({ gist });
 
-export default connect(mapStateToProps, { cancelGistEditMode })(EditorCreateEditGist);
+export default connect(mapStateToProps, { cancelGistEditMode, addGist, editGist })(EditorCreateEditGist);
 

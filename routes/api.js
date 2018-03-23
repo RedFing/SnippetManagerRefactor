@@ -44,7 +44,49 @@ router.delete('/gist/:gistId', function (req,res,next) {
     }).catch(err => res.status(401).send('Unauthorized'));
 });
 module.exports = router;
+router.post('/gist', function (req,res,next) {
+  const user = req.user;
+  if (!user) res.status(401).send('Unauthorized');
+  const requestBody = {
+    description: req.body.description,
+    public: !req.body.isPrivate,
+    files: {
+      [req.body.filename] : {
+        content: req.body.content
+      }
+    }
+  };
+  axios.post('https://api.github.com/gists?'+user.accessToken, requestBody)
+    .then(response => {
+       const [newGist,...rest] = stripUnnecessaryFromGists([response.data]);
+       res.json(newGist);
+    }).catch(err => res.status(400).send('Unauthorized'));
 
+});
+
+router.put('/gist/:id', function (req,res,next) {
+  const user = req.user;
+  if (!user) res.status(401).send('Unauthorized');
+  let requestBodyFilesObject = {
+    content: req.body.content
+  };
+  if (req.body.oldFilename != req.body.filename){
+    requestBodyFilesObject.filename = req.body.filename
+  }
+
+  const requestBody = {
+    description: req.body.description,
+    files: {
+      [req.body.oldFilename]: requestBodyFilesObject
+    }
+  };
+  console.log('REQUEST BODY IS ', requestBody);
+  axios.patch('https://api.github.com/gists/'+req.params.id+'?'+user.accessToken, requestBody)
+    .then(response => {
+      const [editedGist,...rest] = stripUnnecessaryFromGists([response.data]);
+      res.json(editedGist);
+    }).catch(err => {console.log(err); res.status(401).send('Unauthorized')});
+});
 
 const stripUnnecessaryFromGists = gists => gists.map(el =>
   ({

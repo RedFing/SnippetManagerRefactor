@@ -87,8 +87,9 @@ export const editGistSuccess = (editedGist, gistId) => ({
 export const editGist = ({ filename, content, description }) => (dispatch, getState) => {
   dispatch(editGistPending());
   const gistId = getState().gist.gist.id;
+  const oldFilename = getState().gist.gist.filename;
   axios.put(`/api/gist/${gistId}`, {
-    filename, content, description, id: gistId,
+    filename, content, description, id: gistId, oldFilename,
   })
     .then((newGist) => {
       dispatch(editGistSuccess(newGist.data, gistId));
