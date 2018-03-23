@@ -1,4 +1,4 @@
-import {LOGIN_USER_SUCCESS, LOGOUT_USER} from '../actions/actionTypes';
+import { LOGIN_USER_SUCCESS, LOGOUT_USER } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   isLogged: false,

@@ -3,7 +3,7 @@ var router = express.Router();
 var axios = require('axios');
 var secrets = require('../secrets');
 
-var userDB = [];
+var userDB = require('../userDB');
 
 
 /* GET users listing. */

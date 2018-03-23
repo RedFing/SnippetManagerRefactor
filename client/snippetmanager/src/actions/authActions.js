@@ -9,9 +9,9 @@ export const loginUser = response => dispatch => {
     return;
   }
   dispatch(loginUserPending());
-  axios.post('http://localhost:5000/users/login', response)
+  axios.post('/users/login', response)
     .then((res) => {
-      // TODO: set auth header for axios default
+      axios.defaults.headers.common.Authorization = res.data.token;
       dispatch(loginUserSuccess(res.data));
     }).catch(err => dispatch(loginUserFailed(err)));
 };
