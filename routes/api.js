@@ -120,6 +120,12 @@ router.put('/gist/:id', function (req,res,next) {
     }).catch(err => {console.log(err); res.status(401).send('Unauthorized')});
 });
 
+// TODO extreact 140 to constants
+const truncateDescription  = description => {
+    if (description.length > 140) return description.substring(0, 140) + '...';
+    return description;
+}
+
 const stripUnnecessaryFromGists = gists => gists.map(el =>
   ({
     id: el.id,

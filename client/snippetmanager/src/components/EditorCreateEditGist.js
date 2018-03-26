@@ -65,7 +65,7 @@ class EditorCreateEditGist extends React.Component {
         <div className="col-md-12">
           {HeaderText}
 
-          <form clasName="col-sm-9">
+          <form className="col-sm-12">
             <div className="form-group">
               <label>Name</label>
               <input
@@ -115,24 +115,24 @@ class EditorCreateEditGist extends React.Component {
                 </div>
               </div>
               }
-              <div className="btn-toolbar">
-            <button
-              type="button"
-              onClick={this.handleGistSubmit}
-              className="btn btn-primary"
-            >
-              {submitButtonText}
-            </button>
-            {editorMode === 'edit' &&
+            <div className="btn-toolbar">
               <button
                 type="button"
-                onClick={this.props.cancelGistEditMode}
+                onClick={this.handleGistSubmit}
                 className="btn btn-primary"
               >
-                Cancel edit
+                {submitButtonText}
               </button>
+              {editorMode === 'edit' &&
+                <button
+                  type="button"
+                  onClick={this.props.cancelGistEditMode}
+                  className="btn btn-primary"
+                >
+                Cancel edit
+                </button>
               }
-              </div>
+            </div>
           </form>
         </div>
       </div>

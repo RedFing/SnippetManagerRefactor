@@ -1,4 +1,4 @@
-/* eslint-disable no-console,class-methods-use-this */
+/* eslint-disable class-methods-use-this */
 import React from 'react';
 import GitHubLogin from 'react-github-login';
 import { connect } from 'react-redux';
@@ -21,7 +21,6 @@ class Login extends React.Component {
   }
   onLoginFailure(error) {
     // TODO: handle error
-    console.log(error);
   }
   render() {
     if (this.props.auth.isLogged) {

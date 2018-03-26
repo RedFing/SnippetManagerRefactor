@@ -3,7 +3,6 @@ import {
   LOAD_GISTS_SUCCESS, LOAD_GISTS_PENDING, LOGOUT_USER, DELETE_GIST_SUCCESS,
   ADD_GIST_SUCCESS, EDIT_GIST_SUCCESS,
 } from '../actions/actionTypes';
-import { GISTS_FETCH_SIZE } from '../actions/constants';
 
 const INITIAL_STATE = {
   isFetching: false,
@@ -14,6 +13,16 @@ const INITIAL_STATE = {
 
 const removeDeletedGist = (gists, gistId) => gists.filter(el => el.id != gistId);
 const swapEditedGist = (gists, gist, gistId) => gists.map(el => ((el.id == gistId) ? gist : el));
+const localizeDatesInGists = (gists) => {
+  const newGists = gists.map((el) => {
+    const date = new Date(el.createdAt);
+    return {
+      ...el,
+      createdAt: date.toLocaleString(),
+    };
+  });
+  return newGists;
+};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -21,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        gists: [...state.gists, ...action.payload],
+        gists: [...state.gists, ...localizeDatesInGists(action.payload)],
         page: action.payload.length > 0 ? state.page + 1 : state.page,
         isRemaining: action.payload.length > 0,
       };

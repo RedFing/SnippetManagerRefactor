@@ -51,6 +51,7 @@ const GistItemSidebar = ({ gistInfo, loadGist, active }) => (
   </li>
 );
 
-const mapStateToProps = ({ gists, gist }) => ({ gists: gists.gists, gist: gist.gist, isRemaming: gists.isRemaining });
+const mapStateToProps = ({ gists, gist }) =>
+  ({ gists: gists.gists, gist: gist.gist, isRemaming: gists.isRemaining });
 
 export default connect(mapStateToProps, { loadGists, loadGist })(Sidebar);

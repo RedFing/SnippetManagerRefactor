@@ -14,7 +14,6 @@ import Login from './components/Login';
 
 class Router extends React.Component {
   render() {
-    console.log('is logged:', this.props.isLogged);
     return (
       <BrowserRouter>
         <Switch>
