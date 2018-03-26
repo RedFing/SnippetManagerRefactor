@@ -32,10 +32,10 @@ class Login extends React.Component {
         <div className="login-title">Snippet manager</div>
         <div className="login-button">
           <GitHubLogin
-            clientId={GITHUB_CLIENT_ID}
+            clientId={process.env.REACT_APP_GITHUB_CLIENT_ID}
             onSuccess={this.onLoginSuccess}
             onFailure={this.onLoginFailure}
-            redirectUri="http://localhost:3000/login"
+            redirectUri={process.env.REACT_APP_GITHUB_REDIRECT_URI}
             scope="user:email, gist"
             state={GITHUB_STATE_STRING}
             className="btn btn-block btn-social btn-github"

@@ -1,19 +1,18 @@
 var express = require('express');
 var router = express.Router();
-var secrets = require('../secrets');
 var userDB = require('../userDB');
 var axios = require('axios');
-
+var process = require('process');
 /* LOGIN USER */
 router.post('/login', function (req,res,next) {
     const code = req.body.code;
     if (!code) res.status(400);
     console.log('SERVER GOT ON LOGIN CODE', code);
     const requestBody = {
-        client_id: secrets.GITHUB_CLIENT_ID,
-        client_secret: secrets.GITHUB_CLIENT_SECRET,
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
         code: code,
-        redirect_uri: 'http://localhost:3000/login'
+        redirect_uri: process.env.GITHUB_REDIRECT_URI
     };
     let accessToken = '';
     axios.post('https://github.com/login/oauth/access_token', requestBody)
