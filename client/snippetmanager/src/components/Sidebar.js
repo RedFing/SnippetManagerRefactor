@@ -26,11 +26,15 @@ class Sidebar extends React.Component {
                 active={el.id === this.props.gist.id}
               />))}
           </ul>
-          <div>
-              <button className="btn btn-primary"
-               onClick={this.props.loadGists}
-              >Load more</button>
-          </div>
+          { this.props.isRemaining &&
+            <div align="center">
+              <button
+                className="btn btn-primary"
+                onClick={this.props.loadGists}
+              >Load more
+              </button>
+            </div>
+            }
         </div>
 
       </div>
@@ -40,13 +44,13 @@ class Sidebar extends React.Component {
 
 
 const GistItemSidebar = ({ gistInfo, loadGist, active }) => (
-  <li className={active? 'active': ''} style={{ marginBottom: '10px', borderBottom: '2px solid #E8E8E8' }} onClick={() => loadGist(gistInfo.id)}>
+  <li className={active ? 'active' : ''} style={{ marginBottom: '10px', borderBottom: '2px solid #E8E8E8' }} onClick={() => loadGist(gistInfo.id)}>
     <strong>{gistInfo.name}</strong>
     <p><span className="glyphicon glyphicon-info-sign" />{gistInfo.description}</p>
     <small><span className="glyphicon glyphicon-time" />{' '}{gistInfo.createdAt}</small>
   </li>
 );
 
-const mapStateToProps = ({ gists, gist }) => ({ gists: gists.gists, gist: gist.gist });
+const mapStateToProps = ({ gists, gist }) => ({ gists: gists.gists, gist: gist.gist, isRemaming: gists.isRemaining });
 
 export default connect(mapStateToProps, { loadGists, loadGist })(Sidebar);

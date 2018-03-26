@@ -6,6 +6,8 @@ import { Redirect } from 'react-router-dom';
 import { GITHUB_CLIENT_ID, GITHUB_STATE_STRING } from '../secrets';
 import { loginUser, loginUserFailed } from '../actions/authActions';
 
+import './Login.css';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -26,9 +28,10 @@ class Login extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <div>
-        <div>LOGIN</div>
-        <div>
+      <div align="center" className="login-group container">
+        <div className="glyphicon glyphicon-scissors" />
+        <div className="login-title">Snippet manager</div>
+        <div className="login-button">
           <GitHubLogin
             clientId={GITHUB_CLIENT_ID}
             onSuccess={this.onLoginSuccess}
@@ -36,6 +39,8 @@ class Login extends React.Component {
             redirectUri="http://localhost:3000/login"
             scope="user:email, gist"
             state={GITHUB_STATE_STRING}
+            className="btn btn-block btn-social btn-github"
+            buttonText="Authenticate with github"
           />
         </div>
       </div>

@@ -3,12 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './Editor.css';
 import EditorCreateEditGist from './EditorCreateEditGist';
-import EditorViewGist from './EditorViewGist';
+import EditorViewGist, { GistLoading } from './EditorViewGist';
 
 class Editor extends React.Component {
   render() {
     const { editorMode, loading } = this.props;
-    if (loading) return <div>LOADING</div>;
+    if (loading) return <GistLoading />;
     if (editorMode === 'add' || editorMode === 'edit') {
       return <EditorCreateEditGist />;
     }

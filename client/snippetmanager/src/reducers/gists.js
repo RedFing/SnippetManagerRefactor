@@ -22,8 +22,8 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         isFetching: false,
         gists: [...state.gists, ...action.payload],
-        page: state.page + 1,
-        isRemaining: action.payload.length === GISTS_FETCH_SIZE,
+        page: action.payload.length > 0 ? state.page + 1 : state.page,
+        isRemaining: action.payload.length > 0,
       };
     case LOAD_GISTS_PENDING:
       return {

@@ -115,7 +115,7 @@ class EditorCreateEditGist extends React.Component {
                 </div>
               </div>
               }
-
+              <div className="btn-toolbar">
             <button
               type="button"
               onClick={this.handleGistSubmit}
@@ -132,6 +132,7 @@ class EditorCreateEditGist extends React.Component {
                 Cancel edit
               </button>
               }
+              </div>
           </form>
         </div>
       </div>

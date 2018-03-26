@@ -9,7 +9,7 @@ export const loginUser = response => dispatch => {
     return;
   }
   dispatch(loginUserPending());
-  axios.post('/users/login', response)
+  axios.post('/api/login', response)
     .then((res) => {
       axios.defaults.headers.common.Authorization = res.data.token;
       dispatch(loginUserSuccess(res.data));

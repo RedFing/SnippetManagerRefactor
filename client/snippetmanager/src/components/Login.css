@@ -1,0 +1,23 @@
+.login-title {
+
+}
+
+.login-button {
+
+}
+
+.login-group {
+    margin-top: 150px;
+}
+
+button.btn.btn-block.btn-social.btn-github {
+    width: 240px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+
+.glyphicon.glyphicon-scissors {
+    font-size: 30px;
+}
