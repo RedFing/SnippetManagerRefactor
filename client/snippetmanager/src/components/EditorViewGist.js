@@ -16,10 +16,21 @@ class EditorViewGist extends React.Component {
           <pre>{gist.gist.description}</pre>
           <h3>Content</h3>
           <pre>{gist.gist.content}</pre>
-          Created at: {gist.gist.createdAt}
+          <div>Created at: {gist.gist.createdAt}</div>
+          <div className="btn-group" role="group">
+            <button
+              className="btn btn-primary"
+              onClick={this.props.setGistEditMode}
+            >Edit snippet
+            </button>
+            <button
+              className="btn btn-danger"
+              onClick={this.props.deleteGist}
+            >Delete snippet
+            </button>
+          </div>
         </div>
-        <button onClick={this.props.setGistEditMode}>edit</button>
-        <button onClick={this.props.deleteGist}>delete</button>
+
       </div>
     );
   }

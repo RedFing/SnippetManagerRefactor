@@ -8,5 +8,33 @@
     position:relative;
     overflow-y:auto;
     overflow-x:hidden;
+    box-shadow: 2px 2px 5px #E8E8E8;
+
 }
 
+h3.sidebar-title {
+    background-color: darkgray;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white
+}
+li {
+    padding: 10px;
+    cursor: pointer;
+
+}
+li:hover {
+    background-color: #E8E8E8;
+}
+.active {
+    background-color: #C5C5C5;
+}
+#sidebar p {
+    margin: 0;
+    padding: 0;
+}
+#sidebar strong {
+    font-size: large;
+    padding: 5px;
+}

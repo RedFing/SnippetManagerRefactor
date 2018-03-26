@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow, jsx-a11y/no-noninteractive-element-interactions,
+ jsx-a11y/click-events-have-key-events
+*/
 import React from 'react';
 import { connect } from 'react-redux';
 import { loadGists } from '../actions/gistsActions';
@@ -13,10 +16,21 @@ class Sidebar extends React.Component {
     return (
       <div id="sidebar">
         <div className="col-md-12">
-          <h3>Sidebar (fixed)</h3>
+          <h3 className="sidebar-title">My snippets</h3>
           <ul className="nav nav-pills nav-stacked">
-            {this.props.gists.map(el => <GistItemSidebar key={el.id} gistInfo={el} loadGist={this.props.loadGist} />)}
+            {this.props.gists.map(el =>
+              (<GistItemSidebar
+                key={el.id}
+                gistInfo={el}
+                loadGist={this.props.loadGist}
+                active={el.id === this.props.gist.id}
+              />))}
           </ul>
+          <div>
+              <button className="btn btn-primary"
+               onClick={this.props.loadGists}
+              >Load more</button>
+          </div>
         </div>
 
       </div>
@@ -24,14 +38,15 @@ class Sidebar extends React.Component {
   }
 }
 
-const mapStateToProps = ({ gists }) => ({ gists: gists.gists });
 
-export default connect(mapStateToProps, { loadGists, loadGist })(Sidebar);
-
-const GistItemSidebar = ({ gistInfo, loadGist }) => (
-  <li onClick={() => loadGist(gistInfo.id)}>
-    <p>Name: {gistInfo.name}</p>
-    <p>Description: {gistInfo.description}</p>
-    <p>Created: {gistInfo.createdAt}</p>
+const GistItemSidebar = ({ gistInfo, loadGist, active }) => (
+  <li className={active? 'active': ''} style={{ marginBottom: '10px', borderBottom: '2px solid #E8E8E8' }} onClick={() => loadGist(gistInfo.id)}>
+    <strong>{gistInfo.name}</strong>
+    <p><span className="glyphicon glyphicon-info-sign" />{gistInfo.description}</p>
+    <small><span className="glyphicon glyphicon-time" />{' '}{gistInfo.createdAt}</small>
   </li>
 );
+
+const mapStateToProps = ({ gists, gist }) => ({ gists: gists.gists, gist: gist.gist });
+
+export default connect(mapStateToProps, { loadGists, loadGist })(Sidebar);
