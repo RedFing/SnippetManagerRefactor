@@ -32,7 +32,7 @@ class Sidebar extends React.Component {
               </button>
             </div>
           }
-          {!this.props.gists.length &&
+          {(!this.props.gists.length && !this.props.gistsLoading) &&
           <div style={{ textAlign: 'center' }}>No snippets found!</div>}
         </div>
       </div>
@@ -41,6 +41,11 @@ class Sidebar extends React.Component {
 }
 
 const mapStateToProps = ({ gists, gist }) =>
-  ({ gists: gists.gists, gist: gist.gist, isRemaming: gists.isRemaining });
+  ({
+    gists: gists.gists,
+    gist: gist.gist,
+    isRemaming: gists.isRemaining,
+    gistsLoading: gists.isFetching,
+  });
 
 export default connect(mapStateToProps, { loadGists, loadGist })(Sidebar);
