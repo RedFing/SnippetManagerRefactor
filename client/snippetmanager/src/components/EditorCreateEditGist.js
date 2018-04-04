@@ -42,12 +42,10 @@ class EditorCreateEditGist extends React.Component {
       filename, content, description, isPrivate,
     } = this.state;
     if (editorMode === EDITOR_MODE_ADD) {
-      // create new gist
       this.props.addGist({
         filename, content, description, isPrivate,
       });
     } else {
-      // edit the gist
       this.props.editGist({
         filename, content, description,
       });
@@ -56,11 +54,11 @@ class EditorCreateEditGist extends React.Component {
   render() {
     const { editorMode } = this.props.gist;
     const HeaderText = editorMode === EDITOR_MODE_ADD
-      ? <h1>Create a new gist: </h1>
-      : <h1>Edit gist: </h1>;
+      ? <h1>Create a new snippet: </h1>
+      : <h1>Edit snippet: </h1>;
     const submitButtonText = editorMode === EDITOR_MODE_ADD
-      ? 'Create new gist'
-      : 'Edit gist';
+      ? 'Create new snippet'
+      : 'Edit snippet';
 
     return (
       <div>
@@ -72,7 +70,7 @@ class EditorCreateEditGist extends React.Component {
               className="form-control"
               type="text"
               label="Filename"
-              placeholder="Enter gist filename (including extension)"
+              placeholder="Enter snippet filename (including extension)"
               value={this.state.filename}
               name="filename"
               onChange={this.handleInputChange}
@@ -110,7 +108,7 @@ class EditorCreateEditGist extends React.Component {
                 value={this.state.isPrivate}
                 onChange={this.handleInputChange}
                 name="isPrivate"
-              />Make this a private gist
+              />Make this a private snippet
               </label>
             </div>
           </div>

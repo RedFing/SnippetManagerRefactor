@@ -17,7 +17,7 @@ class Header extends React.Component {
           </Navbar.Header>
           <Nav pullRight>
             <MenuItem onClick={this.props.setGistAddMode}>
-            Create new gist
+            Create new snippet
             </MenuItem>
             <NavDropdown
               eventKey={3}

@@ -64,7 +64,7 @@ export const deleteGist = () => (dispatch, getState) => {
   axios.delete(`/api/gist/${gistId}`)
     .then(() => {
       dispatch(deleteGistSuccess(gistId));
-      toast('Gist was deleted successfully!');
+      toast('Snippet was deleted successfully!');
     }).catch((err) => {
       dispatch(deleteGistFailed(err));
       toast('An error has occurred!');
@@ -97,7 +97,7 @@ export const editGist = ({ filename, content, description }) => (dispatch, getSt
   })
     .then((newGist) => {
       dispatch(editGistSuccess(newGist.data, gistId));
-      toast(`Gist ${oldFilename} edited successfully!`);
+      toast(`Snippet ${oldFilename} edited successfully!`);
     }).catch((err) => {
       dispatch(editGistFailed(err));
       toast('An error has occurred!');
@@ -128,7 +128,7 @@ export const addGist = ({
     .then((res) => {
       const newGist = res.data;
       dispatch(addGistSuccess(newGist));
-      toast(`Gist ${filename} added successfully!`);
+      toast(`Snippet ${filename} added successfully!`);
     })
     .catch((err) => {
       dispatch(addGistFailed(err));
