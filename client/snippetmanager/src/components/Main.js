@@ -1,4 +1,6 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
+
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Editor from './Editor';
@@ -12,6 +14,7 @@ export default class Main extends React.Component {
         <EditorContainer>
           <Editor />
         </EditorContainer>
+        <ToastContainer hideProgressBar />
       </div>
     );
   }
