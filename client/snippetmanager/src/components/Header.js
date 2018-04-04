@@ -24,7 +24,7 @@ class Header extends React.Component {
               title={this.props.username}
               id="basic-nav-dropdown"
             >
-              <MenuItem eventKey={3.1} onClick={this.props.logoutUser}>
+              <MenuItem onClick={this.props.logoutUser}>
               Log out
               </MenuItem>
             </NavDropdown>

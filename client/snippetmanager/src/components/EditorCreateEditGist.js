@@ -1,18 +1,19 @@
 /* eslint-disable prefer-destructuring, jsx-a11y/label-has-for */
-// props: editorMode: 'edit' | 'add'
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { cancelGistEditMode, addGist, editGist } from '../actions/gistActions';
+import { EDITOR_MODE_ADD, EDITOR_MODE_EDIT } from '../constants';
 
 class EditorCreateEditGist extends React.Component {
   constructor(props) {
     super(props);
-    const { editorMode, gist } = this.props.gist;
-    if (editorMode === 'edit') {
+    const { editorMode, gist: { content, filename, description } } = this.props.gist;
+    if (editorMode === EDITOR_MODE_EDIT) {
       this.state = {
-        content: gist.content,
-        filename: gist.filename,
-        description: gist.description,
+        content,
+        filename,
+        description,
         isPrivate: null,
       };
     } else {
@@ -40,7 +41,7 @@ class EditorCreateEditGist extends React.Component {
     const {
       filename, content, description, isPrivate,
     } = this.state;
-    if (editorMode === 'add') {
+    if (editorMode === EDITOR_MODE_ADD) {
       // create new gist
       this.props.addGist({
         filename, content, description, isPrivate,
@@ -54,11 +55,12 @@ class EditorCreateEditGist extends React.Component {
   }
   render() {
     const { editorMode } = this.props.gist;
-    const HeaderText = editorMode === 'add'
+    const HeaderText = editorMode === EDITOR_MODE_ADD
       ? <h1>Create a new gist: </h1>
       : <h1>Edit gist: </h1>;
-    const submitButtonText = editorMode === 'add'
-      ? 'Create new gist' : 'Edit gist';
+    const submitButtonText = editorMode === EDITOR_MODE_ADD
+      ? 'Create new gist'
+      : 'Edit gist';
 
     return (
       <div id="main">
@@ -101,7 +103,7 @@ class EditorCreateEditGist extends React.Component {
                 onChange={this.handleInputChange}
               />
             </div>
-            {editorMode === 'add' &&
+            {editorMode === EDITOR_MODE_ADD &&
 
               <div className="form-group" >
                 <div className="checkbox">
@@ -123,7 +125,7 @@ class EditorCreateEditGist extends React.Component {
               >
                 {submitButtonText}
               </button>
-              {editorMode === 'edit' &&
+              {editorMode === EDITOR_MODE_EDIT &&
                 <button
                   type="button"
                   onClick={this.props.cancelGistEditMode}

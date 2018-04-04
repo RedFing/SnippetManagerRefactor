@@ -11,14 +11,23 @@ import {
 
 import Main from './components/Main';
 import Login from './components/Login';
+import { ROUTER_LOGIN_PATH, ROTUER_MAIN_PATH } from './constants';
 
 class Router extends React.Component {
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          <PrivateRoute isLogged={this.props.isLogged} exact path="/" component={Main} />
-          <Route path="/login" component={Login} />
+          <PrivateRoute
+            exact
+            isLogged={this.props.isLogged}
+            path={ROTUER_MAIN_PATH}
+            component={Main}
+          />
+          <Route
+            path={ROUTER_LOGIN_PATH}
+            component={Login}
+          />
         </Switch>
       </BrowserRouter>
     );
@@ -32,7 +41,7 @@ const PrivateRoute = ({ component: Component, isLogged, ...rest }) => (
       (isLogged ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/login" />
+        <Redirect to={ROUTER_LOGIN_PATH} />
       ))
     }
   />

@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import React from 'react';
 import GitHubLogin from 'react-github-login';
 import { connect } from 'react-redux';
@@ -18,6 +17,7 @@ class Login extends React.Component {
   onLoginSuccess(response) {
     this.props.loginUser(response);
   }
+  // eslint-disable-next-line no-unused-vars, class-methods-use-this
   onLoginFailure(error) {
     // TODO: handle error
   }
@@ -36,7 +36,7 @@ class Login extends React.Component {
             onFailure={this.onLoginFailure}
             redirectUri={process.env.REACT_APP_GITHUB_REDIRECT_URI}
             scope="user:email, gist"
-            state="random"
+            state={process.env.REACT_APP_GITHUB_STATE_STRING}
             className="btn btn-block btn-social btn-github"
             buttonText="Authenticate with github"
           />
