@@ -63,82 +63,78 @@ class EditorCreateEditGist extends React.Component {
       : 'Edit gist';
 
     return (
-      <div id="main">
-        <div className="col-md-12">
-          {HeaderText}
+      <div>
+        {HeaderText}
+        <form className="col-sm-12">
+          <div className="form-group">
+            <label>Name</label>
+            <input
+              className="form-control"
+              type="text"
+              label="Filename"
+              placeholder="Enter gist filename (including extension)"
+              value={this.state.filename}
+              name="filename"
+              onChange={this.handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Description</label>
+            <textarea
+              className="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              placeholder="Enter description"
+              value={this.state.description}
+              name="description"
+              onChange={this.handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Content</label>
+            <textarea
+              className="form-control"
+              rows="3"
+              placeholder="Enter content"
+              value={this.state.content}
+              name="content"
+              onChange={this.handleInputChange}
+            />
+          </div>
+          {editorMode === EDITOR_MODE_ADD &&
 
-          <form className="col-sm-12">
-            <div className="form-group">
-              <label>Name</label>
-              <input
-                className="form-control"
-                type="text"
-                label="Filename"
-                placeholder="Enter gist filename (including extension)"
-                value={this.state.filename}
-                name="filename"
+          <div className="form-group" >
+            <div className="checkbox">
+              <label><input
+                type="checkbox"
+                value={this.state.isPrivate}
                 onChange={this.handleInputChange}
-              />
+                name="isPrivate"
+              />Make this a private gist
+              </label>
             </div>
-            <div className="form-group">
-              <label>Description</label>
-              <textarea
-                className="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                placeholder="Enter description"
-                value={this.state.description}
-                name="description"
-                onChange={this.handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label>Content</label>
-              <textarea
-                className="form-control"
-                rows="3"
-                placeholder="Enter content"
-                value={this.state.content}
-                name="content"
-                onChange={this.handleInputChange}
-              />
-            </div>
-            {editorMode === EDITOR_MODE_ADD &&
-
-              <div className="form-group" >
-                <div className="checkbox">
-                  <label><input
-                    type="checkbox"
-                    value={this.state.isPrivate}
-                    onChange={this.handleInputChange}
-                    name="isPrivate"
-                  />Make this a private gist
-                  </label>
-                </div>
-              </div>
+          </div>
               }
-            <div className="btn-toolbar">
-              <button
-                type="button"
-                onClick={this.handleGistSubmit}
-                className="btn btn-primary"
-              >
-                {submitButtonText}
-              </button>
-              {editorMode === EDITOR_MODE_EDIT &&
-                <button
-                  type="button"
-                  onClick={this.props.cancelGistEditMode}
-                  className="btn btn-primary"
-                >
+          <div className="btn-toolbar">
+            <button
+              type="button"
+              onClick={this.handleGistSubmit}
+              className="btn btn-primary"
+            >
+              {submitButtonText}
+            </button>
+            {editorMode === EDITOR_MODE_EDIT &&
+            <button
+              type="button"
+              onClick={this.props.cancelGistEditMode}
+              className="btn btn-primary"
+            >
                 Cancel edit
-                </button>
+            </button>
               }
-            </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-
     );
   }
 }

@@ -9,8 +9,19 @@ export default class Main extends React.Component {
       <div>
         <Header />
         <Sidebar />
-        <Editor />
+        <EditorContainer>
+          <Editor />
+        </EditorContainer>
       </div>
     );
   }
 }
+
+// TODO: extract to separate file
+const EditorContainer = ({ children }) => (
+  <div id="main">
+    <div className="col-md-12">
+      {children}
+    </div>
+  </div>
+);
