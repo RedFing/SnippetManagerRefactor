@@ -1,0 +1,10 @@
+#header-avatar {
+    max-height: 30px;
+    width: auto;
+    vertical-align: middle;
+}
+
+a#basic-nav-dropdown.dropdown-toggle {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}

@@ -5,6 +5,8 @@ import { Navbar, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 import { logoutUser } from '../actions/authActions';
 import { setGistAddMode } from '../actions/gistActions';
 
+import './Header.css';
+
 class Header extends React.Component {
   render() {
     return (
@@ -21,7 +23,11 @@ class Header extends React.Component {
             </MenuItem>
             <NavDropdown
               eventKey={3}
-              title={this.props.username}
+              title={
+                <React.Fragment>
+                  <img id="header-avatar" src={this.props.avatarUrl} alt="avatar" />
+                  {this.props.username}
+                </React.Fragment>}
               id="basic-nav-dropdown"
             >
               <MenuItem onClick={this.props.logoutUser}>
