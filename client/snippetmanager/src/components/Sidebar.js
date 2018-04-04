@@ -15,7 +15,7 @@ class Sidebar extends React.Component {
         <div className="col-md-12">
           <h3 className="sidebar-title">My snippets</h3>
           <ul className="nav nav-pills nav-stacked">
-            {this.props.gists.map(el =>
+            {this.props.gists.length > 0 && this.props.gists.map(el =>
               (<SidebarGistItem
                 key={el.id}
                 gistInfo={el}
@@ -32,6 +32,8 @@ class Sidebar extends React.Component {
               </button>
             </div>
           }
+          {!this.props.gists.length &&
+          <div style={{ textAlign: 'center' }}>No snippets found!</div>}
         </div>
       </div>
     );
